@@ -126,9 +126,15 @@ export default function AnimalBand() {
     return () => {
       clearTimeout(sunsetTimer);
       if (lullabyInterval.current) clearInterval(lullabyInterval.current);
-      if (songTimeout.current) clearTimeout(songTimeout.current);
     };
   }, [playSwoosh, playLullaby]);
+
+  // Separate unmount cleanup for the song timeout
+  useEffect(() => {
+    return () => {
+      if (songTimeout.current) clearTimeout(songTimeout.current);
+    };
+  }, []);
 
   const handleAnimalClick = (animal) => {
     if (isNightTime || isPlayingSong) {
