@@ -28,6 +28,7 @@ export default function AnimalBand() {
   
   const [activeAnimal, setActiveAnimal] = useState(null);
   const [isNightTime, setIsNightTime] = useState(false);
+  const [isPlayingSong, setIsPlayingSong] = useState(false);
   
   const lullabyInterval = useRef(null);
   const songTimeout = useRef(null);
@@ -88,7 +89,7 @@ export default function AnimalBand() {
     ];
     
     // Disable clicks while playing
-    setIsNightTime(true); 
+    setIsPlayingSong(true); 
     
     const playNextNote = () => {
       if (noteIndex < melody.length) {
@@ -105,7 +106,7 @@ export default function AnimalBand() {
         noteIndex++;
         songTimeout.current = setTimeout(playNextNote, note.d + 50);
       } else {
-        setIsNightTime(false); // Re-enable clicks
+        setIsPlayingSong(false); // Re-enable clicks
       }
     };
     
@@ -130,8 +131,8 @@ export default function AnimalBand() {
   }, [playSwoosh, playLullaby]);
 
   const handleAnimalClick = (animal) => {
-    if (isNightTime) {
-      // Gentle chime if clicked during sleep mode
+    if (isNightTime || isPlayingSong) {
+      // Gentle chime if clicked during sleep mode or while song is playing
       playTone(880.0, 'sine', 0.2, 0.05);
       return;
     }
@@ -189,8 +190,8 @@ export default function AnimalBand() {
           <motion.div
             key={animal.id}
             style={{...styles.animalBlock, backgroundColor: isNightTime ? '#2c3e50' : animal.color}}
-            whileHover={!isNightTime ? { scale: 1.05 } : {}}
-            whileTap={!isNightTime ? { scale: 0.95 } : {}}
+            whileHover={!isNightTime && !isPlayingSong ? { scale: 1.05 } : {}}
+            whileTap={!isNightTime && !isPlayingSong ? { scale: 0.95 } : {}}
             animate={activeAnimal === animal.id ? { y: -30, rotate: [0, -10, 10, 0] } : { y: 0 }}
             transition={{ type: 'spring', stiffness: 400, damping: 17 }}
             onClick={() => handleAnimalClick(animal)}
@@ -202,7 +203,7 @@ export default function AnimalBand() {
         ))}
       </div>
       
-      {!isNightTime && (
+      {!isNightTime && !isPlayingSong && (
         <div style={styles.controls}>
           <button className="btn-soft btn-blue" onClick={playTwinkleTwinkle}>
             🎵 Play a Song!
