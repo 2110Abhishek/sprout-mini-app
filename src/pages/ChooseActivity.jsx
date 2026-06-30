@@ -16,6 +16,7 @@ export default function ChooseActivity() {
     { id: 'coloring', title: 'Coloring', icon: '🎨', color: 'var(--color-yellow)', path: '/coloring' },
     { id: 'puzzle', title: 'Puzzle', icon: '🧩', color: 'var(--color-tertiary)', path: '/puzzle' },
     { id: 'story', title: 'Story Time', icon: '📖', color: 'var(--color-blue)', path: '/story' },
+    { id: 'band', title: 'Animal Band', icon: '🎵', color: '#87CEEB', path: '/animal-band' },
     { id: 'hunt', title: 'AI Hunt', icon: '📸', color: '#A0E8AF', path: '/hunt' },
   ];
 
@@ -30,27 +31,32 @@ export default function ChooseActivity() {
       <h1 style={styles.title}>Choose Activity</h1>
 
       <div style={styles.grid}>
-        {activities.map((act) => (
-          <motion.div
-            key={act.id}
-            style={{
-              ...styles.card,
-              backgroundColor: act.color,
-              opacity: act.locked ? 0.6 : 1,
-            }}
-            whileHover={!act.locked ? { scale: 1.05 } : {}}
-            whileTap={!act.locked ? { scale: 0.95 } : {}}
-            onClick={() => {
-              if (!act.locked) {
-                playClick();
-                navigate(act.path);
-              }
-            }}
-          >
-            <span style={styles.icon}>{act.icon}</span>
-            <h2 style={styles.cardTitle}>{act.title}</h2>
-          </motion.div>
-        ))}
+        {activities.map((act, index) => {
+          const isLastOdd = index === activities.length - 1 && activities.length % 2 !== 0;
+          return (
+            <motion.div
+              key={act.id}
+              style={{
+                ...styles.card,
+                backgroundColor: act.color,
+                opacity: act.locked ? 0.6 : 1,
+                gridColumn: isLastOdd ? 'span 2' : 'auto',
+                minHeight: '120px'
+              }}
+              whileHover={!act.locked ? { scale: 1.05 } : {}}
+              whileTap={!act.locked ? { scale: 0.95 } : {}}
+              onClick={() => {
+                if (!act.locked) {
+                  playClick();
+                  navigate(act.path);
+                }
+              }}
+            >
+              <span style={styles.icon}>{act.icon}</span>
+              <h2 style={styles.cardTitle}>{act.title}</h2>
+            </motion.div>
+          );
+        })}
       </div>
     </div>
   );
@@ -64,6 +70,7 @@ const styles = {
     flexDirection: 'column',
     backgroundColor: 'var(--color-background)',
     padding: '2rem',
+    overflowY: 'auto',
   },
   topBar: {
     display: 'flex',
@@ -97,7 +104,7 @@ const styles = {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
     gap: '1rem',
-    flex: 1,
+    paddingBottom: '2rem',
   },
   card: {
     borderRadius: '24px',
