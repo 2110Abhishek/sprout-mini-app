@@ -13,6 +13,84 @@ const PENTATONIC_SCALE = [
   440.00, // A4
 ];
 
+const SONGS = [
+  {
+    title: "Twinkle Twinkle Little Star",
+    melody: [
+      { f: 261.63, d: 400 }, { f: 261.63, d: 400 }, // C C
+      { f: 392.00, d: 400 }, { f: 392.00, d: 400 }, // G G
+      { f: 440.00, d: 400 }, { f: 440.00, d: 400 }, // A A
+      { f: 392.00, d: 800 },                        // G (hold)
+      { f: 349.23, d: 400 }, { f: 349.23, d: 400 }, // F F
+      { f: 329.63, d: 400 }, { f: 329.63, d: 400 }, // E E
+      { f: 293.66, d: 400 }, { f: 293.66, d: 400 }, // D D
+      { f: 261.63, d: 800 },                        // C (hold)
+      { f: 392.00, d: 400 }, { f: 392.00, d: 400 }, // G G
+      { f: 349.23, d: 400 }, { f: 349.23, d: 400 }, // F F
+      { f: 329.63, d: 400 }, { f: 329.63, d: 400 }, // E E
+      { f: 293.66, d: 800 },                        // D (hold)
+      { f: 392.00, d: 400 }, { f: 392.00, d: 400 }, // G G
+      { f: 349.23, d: 400 }, { f: 349.23, d: 400 }, // F F
+      { f: 329.63, d: 400 }, { f: 329.63, d: 400 }, // E E
+      { f: 293.66, d: 800 },                        // D (hold)
+      { f: 261.63, d: 400 }, { f: 261.63, d: 400 }, // C C
+      { f: 392.00, d: 400 }, { f: 392.00, d: 400 }, // G G
+      { f: 440.00, d: 400 }, { f: 440.00, d: 400 }, // A A
+      { f: 392.00, d: 800 },                        // G (hold)
+      { f: 349.23, d: 400 }, { f: 349.23, d: 400 }, // F F
+      { f: 329.63, d: 400 }, { f: 329.63, d: 400 }, // E E
+      { f: 293.66, d: 400 }, { f: 293.66, d: 400 }, // D D
+      { f: 261.63, d: 800 }                         // C (hold)
+    ]
+  },
+  {
+    title: "Mary Had a Little Lamb",
+    melody: [
+      { f: 329.63, d: 400 }, { f: 293.66, d: 400 }, { f: 261.63, d: 400 }, { f: 293.66, d: 400 }, // E D C D
+      { f: 329.63, d: 400 }, { f: 329.63, d: 400 }, { f: 329.63, d: 800 },                        // E E E
+      { f: 293.66, d: 400 }, { f: 293.66, d: 400 }, { f: 293.66, d: 800 },                        // D D D
+      { f: 329.63, d: 400 }, { f: 392.00, d: 400 }, { f: 392.00, d: 800 },                        // E G G
+      { f: 329.63, d: 400 }, { f: 293.66, d: 400 }, { f: 261.63, d: 400 }, { f: 293.66, d: 400 }, // E D C D
+      { f: 329.63, d: 400 }, { f: 329.63, d: 400 }, { f: 329.63, d: 400 }, { f: 329.63, d: 400 }, // E E E E
+      { f: 293.66, d: 400 }, { f: 293.66, d: 400 }, { f: 329.63, d: 400 }, { f: 293.66, d: 400 }, // D D E D
+      { f: 261.63, d: 800 }                                                                       // C
+    ]
+  },
+  {
+    title: "Old MacDonald Had a Farm",
+    melody: [
+      { f: 392.00, d: 400 }, { f: 392.00, d: 400 }, { f: 392.00, d: 400 }, // G G G
+      { f: 261.63, d: 400 }, { f: 261.63, d: 400 }, { f: 261.63, d: 800 }, // C C C
+      { f: 293.66, d: 400 }, { f: 293.66, d: 400 }, { f: 261.63, d: 800 }, // D D C
+      { f: 329.63, d: 400 }, { f: 329.63, d: 400 }, { f: 293.66, d: 400 }, { f: 293.66, d: 400 }, // E E D D
+      { f: 261.63, d: 800 }                                                                       // C
+    ]
+  },
+  {
+    title: "Row Your Boat",
+    melody: [
+      { f: 261.63, d: 600 }, { f: 261.63, d: 600 }, { f: 261.63, d: 400 }, { f: 293.66, d: 200 }, { f: 329.63, d: 600 }, // C C C D E
+      { f: 329.63, d: 400 }, { f: 293.66, d: 200 }, { f: 329.63, d: 400 }, { f: 349.23, d: 200 }, { f: 392.00, d: 800 }, // E D E F G
+      { f: 523.25, d: 200 }, { f: 523.25, d: 200 }, { f: 523.25, d: 200 },                         // C C C (high)
+      { f: 392.00, d: 200 }, { f: 392.00, d: 200 }, { f: 392.00, d: 200 },                         // G G G
+      { f: 329.63, d: 200 }, { f: 329.63, d: 200 }, { f: 329.63, d: 200 },                         // E E E
+      { f: 261.63, d: 200 }, { f: 261.63, d: 200 }, { f: 261.63, d: 200 },                         // C C C
+      { f: 392.00, d: 400 }, { f: 349.23, d: 200 }, { f: 329.63, d: 400 }, { f: 293.66, d: 200 }, { f: 261.63, d: 800 }  // G F E D C
+    ]
+  },
+  {
+    title: "Brother John",
+    melody: [
+      { f: 261.63, d: 400 }, { f: 293.66, d: 400 }, { f: 329.63, d: 400 }, { f: 261.63, d: 400 }, // C D E C
+      { f: 261.63, d: 400 }, { f: 293.66, d: 400 }, { f: 329.63, d: 400 }, { f: 261.63, d: 400 }, // C D E C
+      { f: 329.63, d: 400 }, { f: 349.23, d: 400 }, { f: 392.00, d: 800 },                        // E F G
+      { f: 329.63, d: 400 }, { f: 349.23, d: 400 }, { f: 392.00, d: 800 },                        // E F G
+      { f: 392.00, d: 200 }, { f: 440.00, d: 200 }, { f: 392.00, d: 200 }, { f: 349.23, d: 200 }, { f: 329.63, d: 400 }, { f: 261.63, d: 400 }, // G A G F E C
+      { f: 392.00, d: 200 }, { f: 440.00, d: 200 }, { f: 392.00, d: 200 }, { f: 349.23, d: 200 }, { f: 329.63, d: 400 }, { f: 261.63, d: 400 }  // G A G F E C
+    ]
+  }
+];
+
 const ANIMALS = [
   { id: 1, emoji: '🦁', color: '#FF9F1C', noteIndex: 0 },
   { id: 2, emoji: '🐘', color: '#2EC4B6', noteIndex: 1 },
@@ -29,6 +107,7 @@ export default function AnimalBand() {
   const [activeAnimal, setActiveAnimal] = useState(null);
   const [isNightTime, setIsNightTime] = useState(false);
   const [isPlayingSong, setIsPlayingSong] = useState(false);
+  const [currentSongIndex, setCurrentSongIndex] = useState(0);
   
   const lullabyInterval = useRef(null);
   const songTimeout = useRef(null);
@@ -52,41 +131,10 @@ export default function AnimalBand() {
     }, 800);
   }, [playTone, addStars, playCheer, navigate]);
 
-  // Play Twinkle Twinkle Little Star
-  const playTwinkleTwinkle = useCallback(() => {
+  // Play the currently selected auto song
+  const playAutoSong = useCallback(() => {
     let noteIndex = 0;
-    const melody = [
-      // Twinkle, twinkle, little star,
-      { f: 261.63, d: 400 }, { f: 261.63, d: 400 }, // C C
-      { f: 392.00, d: 400 }, { f: 392.00, d: 400 }, // G G
-      { f: 440.00, d: 400 }, { f: 440.00, d: 400 }, // A A
-      { f: 392.00, d: 800 },                        // G (hold)
-      // How I wonder what you are!
-      { f: 349.23, d: 400 }, { f: 349.23, d: 400 }, // F F
-      { f: 329.63, d: 400 }, { f: 329.63, d: 400 }, // E E
-      { f: 293.66, d: 400 }, { f: 293.66, d: 400 }, // D D
-      { f: 261.63, d: 800 },                        // C (hold)
-      // Up above the world so high,
-      { f: 392.00, d: 400 }, { f: 392.00, d: 400 }, // G G
-      { f: 349.23, d: 400 }, { f: 349.23, d: 400 }, // F F
-      { f: 329.63, d: 400 }, { f: 329.63, d: 400 }, // E E
-      { f: 293.66, d: 800 },                        // D (hold)
-      // Like a diamond in the sky.
-      { f: 392.00, d: 400 }, { f: 392.00, d: 400 }, // G G
-      { f: 349.23, d: 400 }, { f: 349.23, d: 400 }, // F F
-      { f: 329.63, d: 400 }, { f: 329.63, d: 400 }, // E E
-      { f: 293.66, d: 800 },                        // D (hold)
-      // Twinkle, twinkle, little star,
-      { f: 261.63, d: 400 }, { f: 261.63, d: 400 }, // C C
-      { f: 392.00, d: 400 }, { f: 392.00, d: 400 }, // G G
-      { f: 440.00, d: 400 }, { f: 440.00, d: 400 }, // A A
-      { f: 392.00, d: 800 },                        // G (hold)
-      // How I wonder what you are!
-      { f: 349.23, d: 400 }, { f: 349.23, d: 400 }, // F F
-      { f: 329.63, d: 400 }, { f: 329.63, d: 400 }, // E E
-      { f: 293.66, d: 400 }, { f: 293.66, d: 400 }, // D D
-      { f: 261.63, d: 800 }                         // C (hold)
-    ];
+    const melody = SONGS[currentSongIndex].melody;
     
     // Disable clicks while playing
     setIsPlayingSong(true); 
@@ -111,7 +159,12 @@ export default function AnimalBand() {
     };
     
     playNextNote();
-  }, [playTone]);
+  }, [playTone, currentSongIndex]);
+
+  const changeSong = () => {
+    playClick();
+    setCurrentSongIndex((prev) => (prev + 1) % SONGS.length);
+  };
 
   useEffect(() => {
     playSwoosh();
@@ -211,9 +264,17 @@ export default function AnimalBand() {
       
       {!isNightTime && !isPlayingSong && (
         <div style={styles.controls}>
-          <button className="btn-soft btn-blue" onClick={playTwinkleTwinkle}>
-            🎵 Play a Song!
-          </button>
+          <div style={styles.songCard}>
+            <div style={styles.songTitle}>🎵 {SONGS[currentSongIndex].title}</div>
+            <div style={styles.buttonGroup}>
+              <button className="btn-soft btn-blue" style={styles.songBtn} onClick={playAutoSong}>
+                Play
+              </button>
+              <button className="btn-soft btn-green" style={styles.songBtn} onClick={changeSong}>
+                Next Song 🔁
+              </button>
+            </div>
+          </div>
         </div>
       )}
       
@@ -303,6 +364,38 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     zIndex: 10,
+  },
+  songCard: {
+    background: 'white',
+    padding: '1rem',
+    borderRadius: '20px',
+    boxShadow: '0 8px 0 rgba(0,0,0,0.1)',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '0.75rem',
+    width: '80%',
+    maxWidth: '300px',
+  },
+  songTitle: {
+    fontSize: '1.1rem',
+    fontWeight: '800',
+    color: '#333',
+    textAlign: 'center',
+  },
+  buttonGroup: {
+    display: 'flex',
+    gap: '0.5rem',
+    width: '100%',
+  },
+  songBtn: {
+    flex: 1,
+    padding: '0.75rem',
+    fontSize: '1rem',
+    borderRadius: '12px',
+    textTransform: 'none',
+    letterSpacing: 'normal',
+    boxShadow: '0 4px 0 rgba(0,0,0,0.1)',
   },
   moon: {
     position: 'absolute',
