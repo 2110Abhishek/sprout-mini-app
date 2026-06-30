@@ -30,6 +30,7 @@ export default function AnimalBand() {
   const [isNightTime, setIsNightTime] = useState(false);
   
   const lullabyInterval = useRef(null);
+  const songTimeout = useRef(null);
 
   // Play a beautiful, gentle lullaby sequence
   const playLullaby = useCallback(() => {
@@ -102,7 +103,7 @@ export default function AnimalBand() {
         }
 
         noteIndex++;
-        setTimeout(playNextNote, note.d + 50);
+        songTimeout.current = setTimeout(playNextNote, note.d + 50);
       } else {
         setIsNightTime(false); // Re-enable clicks
       }
@@ -124,6 +125,7 @@ export default function AnimalBand() {
     return () => {
       clearTimeout(sunsetTimer);
       if (lullabyInterval.current) clearInterval(lullabyInterval.current);
+      if (songTimeout.current) clearTimeout(songTimeout.current);
     };
   }, [playSwoosh, playLullaby]);
 
@@ -155,7 +157,11 @@ export default function AnimalBand() {
         <button 
           className="btn-soft"
           style={styles.backButton}
-          onClick={() => { playClick(); navigate('/activities'); }}
+          onClick={() => { 
+            playClick(); 
+            if (songTimeout.current) clearTimeout(songTimeout.current);
+            navigate('/activities'); 
+          }}
         >
           <ArrowLeft size={32} />
         </button>
