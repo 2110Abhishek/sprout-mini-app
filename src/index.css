@@ -22,13 +22,21 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+html, body {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-background);
+}
+
 body {
   font-family: var(--font-family);
-  background-color: var(--color-background);
   color: var(--color-text);
-  overflow: hidden; /* Prevent scrolling in a mini-app/game */
-  width: 100vw;
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
