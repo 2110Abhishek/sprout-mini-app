@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import Confetti from 'react-confetti';
 import { useProgress } from '../../hooks/useProgress';
 import { useSound } from '../../hooks/useSound';
-import { XCircle, Camera, AlertCircle } from 'lucide-react';
+import { XCircle, Camera, AlertCircle, RefreshCw } from 'lucide-react';
 
 const TARGET_ITEMS = [
   { name: 'Cup', icon: '☕', keywords: ['cup', 'coffee mug', 'mug', 'teapot', 'pitcher', 'measuring cup'] },
@@ -33,7 +33,7 @@ export default function CameraHunt() {
   const predictInterval = useRef(null);
 
   useEffect(() => {
-    // Pick a random target
+    // Pick a random target initially
     setTargetItem(TARGET_ITEMS[Math.floor(Math.random() * TARGET_ITEMS.length)]);
     
     // Load the model
@@ -54,8 +54,19 @@ export default function CameraHunt() {
     };
   }, []);
 
-  const startPredictions = useCallback(() => {
-    if (!model || !targetItem || isSuccess || !webcamRef.current) return;
+  // Manage prediction interval reactively
+  useEffect(() => {
+    if (!model || !targetItem || isSuccess) {
+      if (predictInterval.current) {
+        clearInterval(predictInterval.current);
+        predictInterval.current = null;
+      }
+      return;
+    }
+
+    if (predictInterval.current) {
+      clearInterval(predictInterval.current);
+    }
 
     predictInterval.current = setInterval(async () => {
       if (webcamRef.current && webcamRef.current.video && webcamRef.current.video.readyState === 4) {
@@ -65,7 +76,6 @@ export default function CameraHunt() {
           
           // Check if any prediction matches our target keywords
           const isMatch = predictions.some(p => {
-             // MobileNet returns classes like "coffee mug, cup"
              const pClasses = p.className.toLowerCase();
              return targetItem.keywords.some(kw => pClasses.includes(kw.toLowerCase()));
           });
@@ -78,7 +88,24 @@ export default function CameraHunt() {
         }
       }
     }, 1000); // Check every 1 second
+
+    return () => {
+      if (predictInterval.current) {
+        clearInterval(predictInterval.current);
+        predictInterval.current = null;
+      }
+    };
   }, [model, targetItem, isSuccess]);
+
+  const shuffleTargetItem = () => {
+    playPop();
+    let newItem = targetItem;
+    // Find a different item
+    while (newItem === targetItem) {
+      newItem = TARGET_ITEMS[Math.floor(Math.random() * TARGET_ITEMS.length)];
+    }
+    setTargetItem(newItem);
+  };
 
   const handleSuccess = () => {
     if (predictInterval.current) clearInterval(predictInterval.current);
@@ -114,6 +141,16 @@ export default function CameraHunt() {
             animate={{ y: 0, opacity: 1 }}
           >
             <h2 style={styles.targetText}>Find a {targetItem.name}! {targetItem.icon}</h2>
+            {!isSuccess && (
+              <button 
+                style={styles.shuffleBtn} 
+                onClick={shuffleTargetItem}
+                title="Find a different item"
+              >
+                <RefreshCw size={16} color="#666" />
+                <span style={{ fontSize: '0.9rem', color: '#666', fontWeight: 'bold' }}>Shuffle</span>
+              </button>
+            )}
           </motion.div>
         )}
       </div>
@@ -147,7 +184,6 @@ export default function CameraHunt() {
                 transform: 'scaleX(-1)' // Mirror effect
               }}
               videoConstraints={{ facingMode: 'environment' }} // Back camera if available
-              onUserMedia={startPredictions}
               onUserMediaError={handleUserMediaError}
             />
             {isSuccess && (
@@ -202,9 +238,21 @@ const styles = {
     textAlign: 'center'
   },
   targetText: {
-    margin: 0,
+    margin: '0 0 0.5rem 0',
     color: '#333',
     fontSize: '2rem'
+  },
+  shuffleBtn: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    background: '#f1f5f9',
+    border: 'none',
+    padding: '0.5rem 1rem',
+    borderRadius: '12px',
+    cursor: 'pointer',
+    outline: 'none',
+    boxShadow: '0 2px 0 rgba(0,0,0,0.05)',
   },
   cameraContainer: {
     flex: 1,

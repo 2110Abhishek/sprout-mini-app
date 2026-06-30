@@ -10,7 +10,7 @@ import ColoringGame from './activities/Coloring/ColoringGame';
 import PuzzleGame from './activities/Puzzle/PuzzleGame';
 import StoryGame from './activities/Story/StoryGame';
 import CameraHunt from './activities/CameraHunt/CameraHunt';
-
+import AnimalBand from './activities/AnimalBand/AnimalBand';
 function App() {
   return (
     <Router>
@@ -25,6 +25,7 @@ function App() {
         <Route path="/puzzle" element={<PuzzleGame />} />
         <Route path="/story" element={<StoryGame />} />
         <Route path="/hunt" element={<CameraHunt />} />
+        <Route path="/animal-band" element={<AnimalBand />} />
       </Routes>
     </Router>
   );

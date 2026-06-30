@@ -103,6 +103,7 @@ export const useSound = () => {
   }, [playTone]);
 
   return {
+    playTone,
     playCorrect,
     playWrong,
     playPop,
